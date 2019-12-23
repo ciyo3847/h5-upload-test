@@ -15,26 +15,42 @@
 	<div class="box">
 		<input id="btn_camera" type="file" accept="image/*" capture="camera"/>
 		<img id="image" width="300" height="200" />
+		<div style="width: 100%;height: 30px;"></div>
+		<input id="btn_camera1" type="file" accept="image/*" multiple"/>
+		<img id="image1" width="300" height="200" />
 	</div>
 </body>
 
 <script>
-	document.getElementById("btn_camera").addEventListener('change', onTake, false)
-	function onTake(){
-		var file = document.getElementById("btn_camera").files[0];
+	document.getElementById("btn_camera").addEventListener('change', function() {
+		var file = document.getElementById('btn_camera').files[0];
+		console.log(file)
 		var reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.οnlοad = function(e) {
-			console.log('11', e)	
-			document.getElementById("image").src = e.target.result;	
-		}
-		reader.onerror = function(e) {
-			console.log('22', e)
-		}
 		reader.onloadend = function(e) {
 			console.log('33', e)
-			document.getElementById("image").src = e.currentTarget.result;	
+			document.getElementById('image').src = e.currentTarget.result;	
 		}	
-	}
+		reader.readAsDataURL(file);
+	}, false)
+	document.getElementById("btn_camera1").addEventListener('change', function() {
+		var file = document.getElementById('btn_camera1').files[0];
+		console.log(file)
+		var reader = new FileReader();
+		reader.onloadend = function(e) {
+			console.log('33', e)
+			document.getElementById('image1').src = e.currentTarget.result;	
+		}	
+		reader.readAsDataURL(file);
+	}, false)
+	// function onTake(id, imageId){
+	// 	var file = document.getElementById(id).files[0];
+	// 	console.log(file)
+	// 	var reader = new FileReader();
+	// 	reader.onloadend = function(e) {
+	// 		console.log('33', e)
+	// 		document.getElementById(imageId).src = e.currentTarget.result;	
+	// 	}	
+	// 	reader.readAsDataURL(file);
+	// }
 </script>
 </html>
