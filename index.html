@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文件上传测试</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no,viewport-fit=cover">
+	<style type="text/css">
+		.box {
+			margin: 30px 0 0 0;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<input id="btn_camera" type="file" accept="image/*" capture="camera"/>
+		<img id="image" width="300" height="200" />
+	</div>
+</body>
+
+<script>
+	document.getElementById("btn_camera").addEventListener('change', onTake, false)
+	function onTake(){
+		var file = document.getElementById("btn_camera").files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.οnlοad = function(e) {
+			console.log('11', e)	
+			document.getElementById("image").src = e.target.result;	
+		}
+		reader.onerror = function(e) {
+			console.log('22', e)
+		}
+		reader.onloadend = function(e) {
+			console.log('33', e)
+			document.getElementById("image").src = e.currentTarget.result;	
+		}	
+	}
+</script>
+</html>
